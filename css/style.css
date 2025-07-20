@@ -1,9 +1,11 @@
+/* Global styles */
 body {
     font-family: sans-serif;
     margin: 0;
     background-color: #f4f4f4;
 }
 
+/* Header */
 header {
     background: #333;
     color: #fff;
@@ -14,6 +16,8 @@ header {
 input[type="text"] {
     width: 60%;
     padding: 8px;
+    margin-top: 10px;
+    font-size: 16px;
 }
 
 main {
@@ -21,28 +25,43 @@ main {
     padding: 1rem;
 }
 
-/* ✅ เพิ่ม Flexbox ให้กับ #product-list */
+/* Loader styling */
+.loader {
+    font-size: 1.2em;
+    color: #555;
+    margin: 20px auto;
+}
+
+/* Product list container with responsive grid */
 #product-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px; /* ช่องว่างระหว่างสินค้า */
+    gap: 20px;
     padding: 1rem;
 }
 
-/* ✅ คงขนาดกล่องสินค้าไว้แบบ fixed width */
+/* Product card base styling */
 .product-card {
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin: 10px;
     padding: 15px;
-    width: 200px;
+    width: calc(25% - 40px); /* 4 columns with spacing */
+    min-width: 200px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    flex: 0 0 auto; /* ไม่ยืด ไม่หด */
+    flex: 0 0 auto;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
+/* Hover effect */
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Product card content */
 .product-card img {
     max-width: 100%;
     height: auto;
@@ -50,15 +69,32 @@ main {
 
 .product-card h3 {
     font-size: 1.1em;
+    margin: 10px 0 5px;
 }
 
 .product-card p {
     color: #888;
 }
 
-/* ✅ เพิ่มความสวยงามเมื่อแสดงบนหน้าจอเล็ก */
+/* Responsive layout */
+@media (max-width: 1024px) {
+    .product-card {
+        width: calc(33.333% - 40px); /* 3 columns */
+    }
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        width: calc(50% - 40px); /* 2 columns */
+    }
+}
+
 @media (max-width: 500px) {
     .product-card {
-        width: 100%; /* เต็มความกว้าง */
+        width: 100%; /* เต็มความกว้างบนหน้าจอเล็ก */
+    }
+
+    input[type="text"] {
+        width: 90%;
     }
 }

@@ -4,12 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
        const loader = document.getElementById('loader'); //add loader
     let allProducts = [];
 
-
-
     // แสดง Loader ก่อนเริ่มโหลดข้อมูล
     loader.style.display = 'block';
-
     // Fetch products from JSON
+
     fetch('js/products.json')
         .then(response => response.json())
         .then(data => {
@@ -35,13 +33,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Inefficient Search
+    // Improved Search
     searchInput.addEventListener('keyup', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredProducts = allProducts.filter(product => {
-            // Simple search, not very efficient
-            return product.name.toLowerCase().includes(searchTerm);
-        });
+        const searchTerm = searchInput.value.trim().toLowerCase();
+
+        if (searchTerm === '') {
+            // ถ้า searchInput ว่าง ให้แสดงสินค้าทั้งหมด
+            displayProducts(allProducts);
+            return;
+        }
+
+        const filteredProducts = allProducts.filter(product =>
+            product.name.toLowerCase().includes(searchTerm)
+        );
+
         displayProducts(filteredProducts);
     });
 });

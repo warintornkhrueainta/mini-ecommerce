@@ -1,7 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const productList = document.getElementById('product-list');
     const searchInput = document.getElementById('searchInput');
+       const loader = document.getElementById('loader'); //add loader
     let allProducts = [];
+
+
+
+    // แสดง Loader ก่อนเริ่มโหลดข้อมูล
+    loader.style.display = 'block';
 
     // Fetch products from JSON
     fetch('js/products.json')
@@ -12,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     function displayProducts(products) {
+
+                // ซ่อน Loader เมื่อโหลดเสร็จ
+        loader.style.display = 'none';
+        
         productList.innerHTML = ''; // Clear previous list
         products.forEach(product => {
             const card = document.createElement('div');

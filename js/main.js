@@ -10,20 +10,22 @@ document.addEventListener('DOMContentLoaded', () => {
             allProducts = data;
             displayProducts(allProducts);
         });
+function displayProducts(products) {
+    productList.innerHTML = ''; // Clear previous list
+    products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+      
+        const formattedPrice = product.price.toLocaleString();
 
-    function displayProducts(products) {
-        productList.innerHTML = ''; // Clear previous list
-        products.forEach(product => {
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            card.innerHTML = `
-                <img src="${product.image}" alt="${product.name}">
-                <h3>${product.name}</h3>
-                <p>ราคา: ${product.price} บาท</p>
-            `;
-            productList.appendChild(card);
-        });
-    }
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>ราคา: ${formattedPrice} บาท</p>
+        `;
+        productList.appendChild(card);
+    });
+}
 
     // Inefficient Search
     searchInput.addEventListener('keyup', () => {
